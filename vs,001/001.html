@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+  <div class="template-wrap">
+  
+    <div class="ep-flowchart" id="ep-flowchart">
+      <div class="ep-svg-wrap">
+        <!--viewBox是svg大小，画布实际大小-->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300">
+          <g id="Page-1" fill="none" fill-rule="evenodd">
+            <g id="Course-Template">
+              <g id="arrows" transform="translate(115 117)">
+                <g id="arrows/arrow-1.2" transform="rotate(0 10 10)">//调整箭头1.2的位置
+                  <g id="arrow-1.2">//画出箭头1.2
+                    <path id="Line" stroke="#89969F" stroke-linecap="square" d="M 0.336 2.5 h 53"/>
+                    <polygon id="Triangle" fill="#89969F" points="50 5 50 0 55 2.5"/>
+                  </g>
+                </g>
+                <g id="arrows/arrow-1.2-copy" transform="rotate(0 10 10)">
+                  <g id="arrow-1.2">
+                    <path id="Line" stroke="#89969F" stroke-linecap="square" d="M 140 2.5 h 53"/>
+                    <polygon id="Triangle" fill="#89969F" points="190 5 190 0 195 2.5"/>
+                  </g>
+                </g>
+                <g id="arrows/arrow-4" transform="rotate(0 53 220.5)">
+                  <g id="arrow-4">
+                    <path id="Path-4" stroke="#89969F" d="M 335 -48 L 280 2.5 L 335 52"/>
+                    <!-- <path id="Path-5" stroke="#89969F" d="M 28.5 137  H.996"/> -->
+                    <!-- <polygon id="Triangle-2-Copy-2" fill="#89969F" points="337 5 337 0 342 2.5"/>
+                    <polygon id="Triangle-2-Copy-4" fill="#89969F" points="87 273 87 267 90 270"/> -->
+                  </g>
+                </g>
+                <g id="arrow-2" transform="translate(-15 0)">
+                  <path id="Path-2" stroke="#89969F" d="M 435 -48 L 490 2.5 L 435 52"/>
+                  <!-- <polygon id="Triangle-2" fill="#89969F" points="70 86 70 80 73 83"/> -->
+                </g>
+                <!-- <g id="arrow-2-copy" transform="matrix(-1 0 0 1 271 335)">
+                  <path id="Path-2" stroke="#89969F" d="M0 0v73.009C0 78.527 4.485 83 9.992 83H70"/>
+                   <polygon id="Triangle-2" fill="#89969F" points="70 86 70 80 73 83"/> 
+                </g> -->
+              </g>
+              <g id="ep-content" class="ep-svg-block"
+                 @click="{{ display = true; selected = 'ep-content' }}"
+                 transform="translate(30 100)">
+                <rect id="Rectangle" width="85" height="40" fill="#0017A8" opacity=17% rx="20"/>
+                <text id="Content" fill="#586075" font-family="Roboto-Regular, Roboto" font-size="18" letter-spacing="1">
+                  <tspan x="30" y="27">IP1</tspan>
+                </text>
+              </g>
+              <g id="ep-form" class="ep-svg-block"
+                 @click="{{ display = true; selected = 'ep-form' }}"
+                 transform="translate(170 100)">
+                <rect id="Rectangle" width="85" height="40" fill="#0017A8" opacity=17% rx="20"/>
+                <text id="Content" fill="#586075" font-family="Roboto-Regular, Roboto" font-size="18" letter-spacing="1">
+                  <tspan x="30" y="27">IP2</tspan>
+                </text>
+              </g>
+              <g id="ep-media" class="ep-svg-block"
+                 @click="{{ display = true; selected = 'ep-media' }}"
+                 transform="translate(310 100)">
+                <rect id="Rectangle" width="85" height="40" fill="#0017A8" opacity=17% rx="20"/>
+                <text id="Content" fill="#586075" font-family="Roboto-Regular, Roboto" font-size="18" letter-spacing="1">
+                  <tspan x="30" y="27">IP3</tspan>
+                </text>
+              </g>
+              <g id="ep-unity" class="ep-svg-block"
+                 @click="{{ display = true; selected = 'ep-unity' }}"
+                 transform="translate(590 100)">
+                <rect id="Rectangle" width="85" height="40" fill="#0017A8" opacity=17% rx="20"/>
+                <text id="Content" fill="#586075" font-family="Roboto-Regular, Roboto" font-size="18" letter-spacing="1">
+                  <tspan x="30" y="27">IP4</tspan>
+                </text>
+              </g>
+              <g id="ep-elements" class="ep-svg-block"
+                 @click="{{ display = true; selected = 'ep-elements' }}"
+                 transform="translate(450 50)">
+                <rect id="Rectangle" width="85" height="40" fill="#0017A8" opacity=17% rx="20"/>
+                <text id="Content" fill="#586075" font-family="Roboto-Regular, Roboto" font-size="18" letter-spacing="1">
+                  <tspan x="30" y="27">IP5 </tspan>
+                </text>
+              </g>
+              <g id="ep-principles" class="ep-svg-block"
+              @click="{{ display = true; selected = 'ep-principles' }}" 
+                 transform="translate(450 150)">
+                <rect id="Rectangle" width="85" height="40" fill="#0017A8" opacity=17% rx="20"/>
+                <text id="Content" fill="#586075" font-family="Roboto-Regular, Roboto" font-size="18" letter-spacing="1">
+                  <tspan x="30" y="27">IP6 </tspan>
+                </text>
+              </g>
+            </g>
+          </g>
+        </svg>
+        
+      </div>
+
+      <transition name="pop-details"> 
+       <div class="ep-detail-wrap" v-show="selected != ''"
+           @click="{{selected = ''}}">
+        
+        <div class="ep-detail" v-show="selected == 'ep-content'">
+          <table >
+            <tr>
+            <th>时间</th>
+            <th>类型</th>
+            <th>源IP</th>
+            <th>目的IP</th>
+            <th>源端口</th>
+            <th>目的端口</th>
+            <th>协议</th>
+            <th>详细信息</th>
+            </tr>
+            <tr>
+            <td>2021.12.01</td>
+            <td>doc</td>
+            <td>127.01.01</td>
+            <td>127.02.02</td>
+            <td>23</td>
+            <td>102</td>
+            <td>tcp</td>
+            <td><a href="childWindow.html" target="_blank">查看</a></td>
+            </tr>
+            </table>
+ 
+        </div>
+
+        <div class="ep-detail" v-show="selected == 'ep-form'">
+          <table >
+            <tr>
+            <th>时间</th>
+            <th>类型</th>
+            <th>源IP</th>
+            <th>目的IP</th>
+            <th>源端口</th>
+            <th>目的端口</th>
+            <th>协议</th>
+            <th>详细信息</th>
+            </tr>
+            <tr>
+            <td>2021.12.02</td>
+            <td>doc</td>
+            <td>118.01.01</td>
+            <td>118.02.02</td>
+            <td>13</td>
+            <td>152</td>
+            <td>tcp</td>
+            <td><a href="childWindow.html" target="_blank">查看</a></td>
+            </tr>
+            </table>
+
+        </div>
+        <div class="ep-detail" v-show="selected == 'ep-media'">
+          <h3>数据显示</h3>
+          
+        </div>
+        <div class="ep-detail" v-show="selected == 'ep-elements'">
+          <h3>数据显示</h3>
+          
+        </div>
+        <div class="ep-detail" v-show="selected == 'ep-principles'">
+          <h3>数据显示</h3>
+          
+        </div>
+        <div class="ep-detail" v-show="selected == 'ep-unity'">
+          <h3>数据显示</h3>
+          
+        </div>
+        
+        
+       </div> 
+      </transition>
+  
+    </div>
+    
+  </div>
+
+<script>
+var ep = new Vue({
+  el: '#ep-flowchart',
+  data: {
+    selected: ''
+  },
+  methods: {
+
+  }
+})
+
+// var example2 = new Vue({
+//   el: '#example-2',
+//   data: {
+    
+//     items: [
+//       { message: '数据1' },
+//       { message: '数据2' }
+//     ]
+//   }
+// })
+
+// Vue.component('formTitle', {
+//   props: ['post'],
+//   template: `
+//     <div class="formTitle">
+//       <h3>{{ post.title }}</h3>
+//       <div v-html="post.content"></div>
+//     </div>
+//   `
+// })
+
+</script>
+
+<style>
+html,
+body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  padding: 0;
+  margin: 0; }
+
+div {
+  box-sizing: border-box; }
+
+/*容器框的大小有线*/
+.template-wrap {
+  width: 1000px;
+  height: 300px;
+  /* border: 1px solid #767676; */
+  margin: 0 auto;
+  padding: .5em; }
+
+/*没找到*/
+/* figure {
+  margin: 1em auto; } */
+
+.ep-flowchart {
+  width: 1000px;
+  position: absolute; }
+
+.ep-svg-wrap
+.ep-svg-block {
+  cursor: pointer; }  /*鼠标样式*/
+
+rect, text {
+  transition: all .3s ease; }
+  rect:hover rect, rect:hover text, text:hover rect, text:hover text {
+    transform: translateY(-5px);
+    text-shadow: 0 1px 0 #fff, 0 -1px 0 #000; }
+
+/*点击后初始页面的变化是覆盖灰色*/
+/* .ep-detail-wrap {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; } */
+
+/* .ep-detail {
+  position: relative;
+  font-size: 1.2em;
+  background-color: #F5F5F0;
+  color: #586075;
+  transform: translateY(-200%);
+  margin: 50% auto;
+  width: 60%;
+  height: auto;
+  padding: 1em 2em;
+  border-radius: 15px;
+  border: 5px solid #0016a848 ;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2); }
+  .ep-detail::after {
+    content: "\2716";
+    color: #0016a848;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    display: inline-block;
+    font-size: 15px;
+    line-height: 20px;
+    height: 20px;
+    width: 20px;
+    padding: 5px;
+    text-align: center;
+    background-color: #F5F5F0;
+    border-radius: 50%;
+    border: 5px solid;
+    cursor: pointer;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2); } */
+
+/* .pop-details-enter-active, .pop-details-leave-active {
+  transition: all .3s ease-in-out; }
+
+.pop-details-enter {
+  opacity: 0; }
+
+.pop-details-leave-to {
+  opacity: 0; } */
+
+
+/*表格美化*/
+table {
+position: absolute;
+width: 90%;
+background: #ccc;
+margin: 10px auto;
+border-collapse: collapse;
+}
+
+th,td {
+height: 25px;
+line-height: 25px;
+text-align: center;
+border: 1px solid #ccc;
+}
+
+th {
+background: #e8e9f3;
+font-weight: bold;
+}
+
+tr {
+background: #fff;
+}
+
+tr:hover {
+background: rgb(240, 239, 239);
+}
+
+td a {
+color: #06f;
+text-decoration: none;
+}
+
+td a:hover {
+color: #06f;
+text-decoration: underline;
+cursor: pointer; 
+}
+</style>
+
+</body>
+</html>
